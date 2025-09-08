@@ -59,9 +59,6 @@ public class HistoricalEvent
     //DECLARATION SECTION
     /***** STATIC VARIABLES *****/
     public static final String DEFAULT_DESCRIPTION = "Jane Doe";
-	public static final int DEFAULT_MONTH = 12;
-	public static final int DEFAULT_DAY = 31;
-	public static final int DEFAULT_YEAR = 1959;
 
     /***** INSTANCE VARIABLES *****/
 	private String description;
@@ -79,21 +76,19 @@ public class HistoricalEvent
 
     /**
      * Full constructor, takes arguments for all instance variables
-     * @param name name of player
-     * @param age age of player
-     * @param yearsOfExperience number of years playing chess
+     * @param description description of historical event
+     * @param eventDay date of historical event
     */
-    public HistoricalEvent(String name, String age,
-        String yearsOfExperience, int playerNumber)
+    public HistoricalEvent(String description, Date eventDay)
     {
-        boolean setSuccessful = this.setAll(name, age, yearsOfExperience, playerNumber);
+        boolean setSuccessful = this.setAll(description, eventDay);
         if(!setSuccessful)
         {
             System.err.println("CRITICAL ERROR: full constructor given invalid data. Shutting down...");
             System.exit(0);
         }
     }
- 
+
     /**
      * Copy constructor, creates a deep copy of original class object without changing it
      *
@@ -107,7 +102,7 @@ public class HistoricalEvent
             System.exit(0);
         }
         //rest of code will only proceed if error check passed
-        boolean setSuccessful = this.setAll(original.description, original.age, original.yearsOfexperience, original.playerNumber);
+        boolean setSuccessful = this.setAll(original.description, original.eventDay);
         if(!setSuccessful)
         {
             System.err.println("CRITICAL ERROR: full constructor given invalid data. Shutting down...");
@@ -120,85 +115,48 @@ public class HistoricalEvent
 	/***** MUTATORS *****/
 	// MUTATOR METHODS
 	/**
-	 * Sets all instance variable data (5) at once.
+	 * Sets all instance variable data (2) at once.
 	 *
-     * @param name name of chess player
-     * @param age age of player
-     * @param yearsOfExperience years playing chess
-     * @param playerNumber player's number in the game (1 or 2 in a chess game)
+     * @param description description of historical event
+     * @param eventDay date of historical event
 	 * @return boolean that represents valid data (specifically only checks numeric data type validity)
 	*/
-	public boolean setAll(String name, String age,
-        String yearsOfExperience, int playerNumber)
+	public boolean setAll(String description, Date eventDay)
 	{
 		//call void setters
-		this.setDescription(name);
-		this.setAge(age);
-		this.setYearsOfExperience(yearsOfExperience);
-
-		//call boolean returning (error checking) numeric return setters
-		boolean combinedValid = this.setPlayerNumber(playerNumber);
+		boolean combinedValid = true;
+		this.setDescription(description);
+		this.setEventDay(eventDay);
 
 		return combinedValid;
 	}
 
 	/**
-	 * Setting name, no error checking
+	 * Setting description, no error checking
 	 *
-	 * @param name name of chess player
+	 * @param description description of historical event
 	*/
-	public void setDescription(String name)
+	public void setDescription(String description)
 	{
-		this.description = name;
+		this.description = description;
 	}
 
 	/**
-	 * Setting age, no error checking
+	 * Setting event day, no error checking
 	 *
-	 * @param age age of chess player
+	 * @param eventDay date of event
 	*/
-	public void setAge(String age)
+	public void setEventDay(Date eventDay)
 	{
-		this.age = age;
-	}
-
-	/**
-	 * Setting years of experience, no error checking
-	 *
-	 * @param yearsOfExperience number of years playing chess
-	*/
-	public void setYearsOfExperience(String yearsOfExperience)
-	{
-		this.yearsOfexperience = yearsOfExperience;
-	}
-
-  /**
-	 * Setting player number
-	 *
-	 * @param playerNumber of a chess player. allows 1 or 2 to represent 1 or 2 players during a 
-	 * standard chess match
-	 *
-	 * @return boolean representing valid data passed and set in object, nothing set if invalid
-	*/
-	public boolean setPlayerNumber(int playerNumber)
-	{
-		if(playerNumber == 1 || playerNumber == 2)
-		{
-			this.playerNumber = playerNumber;
-			return true;
-		}
-		else
-		{
-			return false;
-		}
+		this.eventDay = eventDay;
 	}
 
   // ACCESSOR METHODS
 
 	/**
-	 * Getting name
+	 * Getting description
 	 *
-	 * @return String representing name
+	 * @return description String representing description of historical event
 	*/
 	public String getDescription()
 	{
@@ -206,64 +164,39 @@ public class HistoricalEvent
 	}
 
 	/**
-	 * Getting age
+	 * Getting eventDay
 	 *
-	 * @return String representing age
+	 * @return eventDay Date representing day of event
 	*/
-	public String getAge()
+	public Date getEventDay()
 	{
-		return this.age;
+		return this.eventDay;
 	}
 
-	/**
-	 * Getting yearsOfExperience
-	 *
-	 * @return String representing years playing chess
-	*/
-	public String getYearsOfExperience()
-	{
-		return this.yearsOfexperience;
-	}
-
-  /**
-	 * Getting playerNumber
-	 *
-	 * @return int representing player number
-	*/
-	public int getPlayerNumber()
-	{
-		return this.playerNumber;
-	}
 
   	/***** OTHER REQUIRED METHODS *****/
 
 	/**
-	 * Convert ChessPlayer into String representation of all data
+	 * Convert Historical Event into String representation of all data
 	 *
-	 * @return String containing all of ChessPlayer objects data, separate by newlines. No newline at end
+	 * @return String containing all of HistoricalEvent objects data, separate by newlines. Newline at end
 	*/
 	public String toString()
 	{
-		return "Player Name: " + this.description +
-			"\nPlayer Age: " + this.age + 
-			"\nYears Playing Chess: " + this.yearsOfexperience +
-			"\nPlayer Number: " + this.playerNumber
-      + "\n";
+		return "On " + eventDay.toString() + ": " + this.description + "\n";
 	}
 
 	/**
-	 * Checking ChessPlayer object equality (all instance variables), case-sensitive
+	 * Checking HistoricalEvent object equality (all instance variables), case-sensitive
 	 *
-	 * @param other ChessPlayer object that is being compared against
+	 * @param other HistoricalEvent object that is being compared against
 	 *
 	 * @return boolean representing equality of two objects, true if all data is exactly the same (case-sensitive)
 	*/
 	public boolean equals(HistoricalEvent other)
 	{
 		return this.description.equals(other.description) &&
-		this.age.equals(other.age) &&
-		this.yearsOfexperience.equals(other.yearsOfexperience) &&
-		this.playerNumber == other.playerNumber;
+		this.eventDay.equals(other.eventDay);
 	}
 }
 
