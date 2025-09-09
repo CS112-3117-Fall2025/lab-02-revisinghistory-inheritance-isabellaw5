@@ -54,15 +54,15 @@ Historical Event
 -----------------------------------------
 */
 
-public class HistoricalEvent
+public class RevisedHistoricalEvent
 {
     //DECLARATION SECTION
     /***** STATIC VARIABLES *****/
-    public static final String DEFAULT_DESCRIPTION = "Default Historical Description";
-
+    public static final String DEFAULT_REVISED_DESCRIPTION = "Default Revised Historical Description";
+	public static final String DEFAULT_CITATION = "Default Revised Historical Description";
     /***** INSTANCE VARIABLES *****/
-	private String description;
-	private Date eventDay;
+	private String revisedDescription;
+	private String citation;
 
     /***** CONSTRUCTORS *****/
 	/**
@@ -70,13 +70,13 @@ public class HistoricalEvent
     */
 	public HistoricalEvent()
 	{
-		this.description = DEFAULT_DESCRIPTION;
+		this.revisedDescription = DEFAULT_REVISED_DESCRIPTION;
 		this.eventDay = new Date();
    	}
 
     /**
      * Full constructor, takes arguments for all instance variables
-     * @param description description of historical event
+     * @param revisedDescription description of historical event
      * @param eventDay date of historical event
     */
     public HistoricalEvent(String description, Date eventDay)
@@ -125,7 +125,7 @@ public class HistoricalEvent
 	{
 		//call void setters
 		boolean combinedValid = true;
-		this.setDescription(description);
+		this.setRevisedDescription(description);
 		this.setEventDay(eventDay);
 
 		return combinedValid;
@@ -136,9 +136,9 @@ public class HistoricalEvent
 	 *
 	 * @param description description of historical event
 	*/
-	public void setDescription(String description)
+	public void setRevisedDescription(String description)
 	{
-		this.description = description;
+		this.revisedDescription = description;
 	}
 
 	/**
@@ -158,9 +158,9 @@ public class HistoricalEvent
 	 *
 	 * @return description String representing description of historical event
 	*/
-	public String getDescription()
+	public String getRevisedDescription()
 	{
-		return this.description;
+		return this.revisedDescription;
 	}
 
 	/**
@@ -183,7 +183,7 @@ public class HistoricalEvent
 	*/
 	public String toString()
 	{
-		return "On " + eventDay.toString() + ": " + this.description + "\n";
+		return "On " + eventDay.toString() + ": " + this.revisedDescription + "\n";
 	}
 
 	/**
@@ -195,7 +195,7 @@ public class HistoricalEvent
 	*/
 	public boolean equals(HistoricalEvent other)
 	{
-		return this.description.equals(other.description) &&
+		return this.revisedDescription.equals(other.description) &&
 		this.eventDay.equals(other.eventDay);
 	}
 }
