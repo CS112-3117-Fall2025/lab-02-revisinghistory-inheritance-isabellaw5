@@ -54,39 +54,40 @@ Historical Event
 -----------------------------------------
 */
 
-public class RevisedHistoricalEvent
+public class RevisedHistoricalEvent extends HistoricalEvent
 {
     //DECLARATION SECTION
     /***** STATIC VARIABLES *****/
-    public static final String DEFAULT_REVISED_DESCRIPTION = "Default Revised Historical Description";
-	public static final String DEFAULT_CITATION = "Default Revised Historical Description";
-    /***** INSTANCE VARIABLES *****/
+	public static final String DEFAULT_REVISED_DESCRIPTION = "Default Revised Historical Description";
+	public static final String DEFAULT_CITATION = "Default Citation";
+    
+	/***** INSTANCE VARIABLES *****/
 	private String revisedDescription;
 	private String citation;
 
     /***** CONSTRUCTORS *****/
 	/**
-     * Default (no argument) constructor, uses default constants defined in this class
-    */
-	public HistoricalEvent()
+	 * Default (no argument) constructor, uses default constants defined in this
+	 * class
+	 */
+	public RevisedHistoricalEvent()
 	{
+		super();
 		this.revisedDescription = DEFAULT_REVISED_DESCRIPTION;
-		this.eventDay = new Date();
+		this.citation = DEFAULT_CITATION;
    	}
 
     /**
-     * Full constructor, takes arguments for all instance variables
-     * @param revisedDescription description of historical event
-     * @param eventDay date of historical event
-    */
-    public HistoricalEvent(String description, Date eventDay)
+	 * Full constructor, takes arguments for all instance variables
+	 * 
+	 * @param revisedDescription description of historical event
+	 * @param citation           citation for information on historical event
+	 */
+	public RevisedHistoricalEvent(String description, Date eventDay, String revisedDescription, String citation)
     {
-        boolean setSuccessful = this.setAll(description, eventDay);
-        if(!setSuccessful)
-        {
-            System.err.println("CRITICAL ERROR: full constructor given invalid data. Shutting down...");
-            System.exit(0);
-        }
+		super(description, eventDay);
+		this.setRevisedDescription(revisedDescription);
+		this.setCitation(citation);
     }
 
     /**
@@ -94,7 +95,7 @@ public class RevisedHistoricalEvent
      *
      * @param original class object to get data from to make deep copy
     */
-    public HistoricalEvent(HistoricalEvent original)
+    public RevisedHistoricalEvent(RevisedHistoricalEvent original)
     {
         if(original == null)
         {
@@ -102,7 +103,7 @@ public class RevisedHistoricalEvent
             System.exit(0);
         }
         //rest of code will only proceed if error check passed
-        boolean setSuccessful = this.setAll(original.description, original.eventDay);
+        boolean setSuccessful = this.setAll(original.description, original.eventDay, original.revisedDescription, original.citation);
         if(!setSuccessful)
         {
             System.err.println("CRITICAL ERROR: full constructor given invalid data. Shutting down...");
@@ -115,13 +116,13 @@ public class RevisedHistoricalEvent
 	/***** MUTATORS *****/
 	// MUTATOR METHODS
 	/**
-	 * Sets all instance variable data (2) at once.
+	 * Sets all instance variable data (4) at once.
 	 *
      * @param description description of historical event
      * @param eventDay date of historical event
 	 * @return boolean that represents valid data (specifically only checks numeric data type validity)
 	*/
-	public boolean setAll(String description, Date eventDay)
+	public boolean setAll(String description, String eventDay)
 	{
 		//call void setters
 		boolean combinedValid = true;
@@ -146,7 +147,7 @@ public class RevisedHistoricalEvent
 	 *
 	 * @param eventDay date of event
 	*/
-	public void setEventDay(Date eventDay)
+	public void setEventDay(String eventDay)
 	{
 		this.eventDay = eventDay;
 	}
@@ -168,7 +169,7 @@ public class RevisedHistoricalEvent
 	 *
 	 * @return eventDay Date representing day of event
 	*/
-	public Date getEventDay()
+	public String getEventDay()
 	{
 		return this.eventDay;
 	}

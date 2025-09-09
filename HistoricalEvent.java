@@ -58,7 +58,7 @@ public class HistoricalEvent
 {
     //DECLARATION SECTION
     /***** STATIC VARIABLES *****/
-    public static final String DEFAULT_DESCRIPTION = "Default Historical Description";
+	public static final String DEFAULT_DESCRIPTION = "Default Historical Description";
 
     /***** INSTANCE VARIABLES *****/
 	private String description;
@@ -79,7 +79,7 @@ public class HistoricalEvent
      * @param description description of historical event
      * @param eventDay date of historical event
     */
-    public HistoricalEvent(String description, Date eventDay)
+	public HistoricalEvent(String description, Date eventDay)
     {
         boolean setSuccessful = this.setAll(description, eventDay);
         if(!setSuccessful)
