@@ -1,5 +1,5 @@
 /**
- * Represents a Historical Event
+ * Represents a Revised Historical Event
  * 
  * @author Isabella Watson
  *
@@ -7,50 +7,38 @@
 
 /* UML CLASS DIAGRAM:
 -----------------------------------------
-Historical Event
+Revised Historical Event
 -----------------------------------------
 
-- name: String
+- revisedDescription: String
 
-- age: String
-
-- yearsOfExperience: String
-
-- playerNumber: int
+- citation: String
 
 -----------------------------------------
 //default constructor method:
-+ ChessPlayer()
++ RevisedHistoricalEvent()
 
 //full constructor method
-+ ChessPlayer(name : String, age : String, yearsOfExperience : String, playerNumber : int)
++ RevisedHistoricalEvent(description : String, eventDay : Date, revisedDescription : String, citation : String)
 
 //Copy constructor method
-+ ChessPlayer(original : ChessPlayer)
++ RevisedHistoricalEvent(original : RevisedHistoricalEvent)
 
-+ setName(name : String) : void
++ setRevisedDescription(revisedDescription : String) : void
 
-+ setAge(age : String) : void
++ setCitation(citation : String) : void
 
-+ setYearsOfExperience(yearsOfExperience : String) : void
++ setAll(description : String, eventDay : Date, revisedDescription : String, citation : String) : boolean
 
-+ setPlayerNumber(playerNumber : int) : boolean
++ getRevisedDescription() : String
 
-+ setAll(name : String, age :  String, yearsOfExperience :  String, playerNumber : int) : boolean
-
-+ getName() : String
-
-+ getAge() : String
-
-+ getYearsOfExperrience() :  String
-
-+ getPlayerNumber() : int
++ getCitation() : String
 
 + toString() : String
 
-+ equals(other : ChessPlayer) : boolean
++ equals(obj : Object) : boolean
 
-+ printData() : void
++ teach() : void
 -----------------------------------------
 */
 
@@ -118,46 +106,49 @@ public class RevisedHistoricalEvent extends HistoricalEvent
 	/**
 	 * Sets all instance variable data (4) at once.
 	 *
-     * @param description description of historical event
-     * @param eventDay date of historical event
+     * @param description String description of historical event
+     * @param eventDay Date date of historical event
+	 * @param revisedDescription String revised description of historical event
+	 * @param citation String citation for historical event
 	 * @return boolean that represents valid data (specifically only checks numeric data type validity)
 	*/
-	public boolean setAll(String description, String eventDay)
+	public boolean setAll(String description, Date eventDay, String revisedDescription, String citation)
 	{
 		//call void setters
 		boolean combinedValid = true;
+		super.setDescription(description);
+		super.setEventDay(eventDay);
 		this.setRevisedDescription(description);
-		this.setEventDay(eventDay);
-
+		this.setCitation(citation);
 		return combinedValid;
 	}
 
 	/**
-	 * Setting description, no error checking
+	 * Setting revisedDescription, no error checking
 	 *
-	 * @param description description of historical event
+	 * @param revisedDescription String description of historical event
 	*/
-	public void setRevisedDescription(String description)
+	public void setRevisedDescription(String revisedDescription)
 	{
-		this.revisedDescription = description;
+		this.revisedDescription = revisedDescription;
 	}
 
 	/**
-	 * Setting event day, no error checking
+	 * Setting citation, no error checking
 	 *
-	 * @param eventDay date of event
+	 * @param citation String of citation for event
 	*/
-	public void setEventDay(String eventDay)
+	public void setCitation(String citation)
 	{
-		this.eventDay = eventDay;
+		this.citation = citation;
 	}
 
   // ACCESSOR METHODS
 
 	/**
-	 * Getting description
+	 * Getting revisedDescription
 	 *
-	 * @return description String representing description of historical event
+	 * @return revisedDescription String representing revised description of historical event
 	*/
 	public String getRevisedDescription()
 	{
@@ -165,39 +156,63 @@ public class RevisedHistoricalEvent extends HistoricalEvent
 	}
 
 	/**
-	 * Getting eventDay
+	 * Getting citation
 	 *
-	 * @return eventDay Date representing day of event
+	 * @return citation String representing citation for historical event
 	*/
-	public String getEventDay()
+	public String getCitation()
 	{
-		return this.eventDay;
+		return this.citation;
 	}
 
 
   	/***** OTHER REQUIRED METHODS *****/
 
 	/**
-	 * Convert Historical Event into String representation of all data
+	 * Convert Revised Historical Event into String representation of all data
 	 *
-	 * @return String containing all of HistoricalEvent objects data, separate by newlines. Newline at end
+	 * @return String containing all of RevisedHistoricalEvent objects data, separate by newlines. Newline at end
 	*/
+
+	@Override
 	public String toString()
 	{
-		return "On " + eventDay.toString() + ": " + this.revisedDescription + "\n";
+		return "The following \"History\" was told for many years:\n\n" + super.toString() +
+		"\n" + 
+		"By correcting history, not just rewriting it, we are revising it to embark on the process of righting a wrong.\nHere is the revised history:\n"
+		+
+		this.getRevisedDescription() +
+		"\n\nSource: " +
+		this.getCitation();
 	}
-
 	/**
-	 * Checking HistoricalEvent object equality (all instance variables), case-sensitive
+	 * Checking RevisedHistoricalEvent object equality (all instance variables), case-sensitive
 	 *
-	 * @param other HistoricalEvent object that is being compared against
+	 * @param historicalEvent istoricalEvent object that is being compared against
 	 *
 	 * @return boolean representing equality of two objects, true if all data is exactly the same (case-sensitive)
 	*/
-	public boolean equals(HistoricalEvent other)
+	@Override
+	public boolean equals(Object obj) {
+		if (obj == null) {
+			return false;
+		} else {
+			RevisedHistoricalEvent otherRevisedHistoricalEvent = (RevisedHistoricalEvent) obj; //downcasting object type to Reised Historical Event type
+			return this.description.equals(otherRevisedHistoricalEvent.description) &&
+					this.eventDay.equals(otherRevisedHistoricalEvent.eventDay) &&
+					this.revisedDescription.equals(otherRevisedHistoricalEvent.revisedDescription) &&
+					this.revisedDescription.equals(otherRevisedHistoricalEvent.revisedDescription);
+		}
+	}
+
+	/**
+	 * teach method
+	 *
+	 * @return void, print class information to console
+	*/
+	public void teach()
 	{
-		return this.revisedDescription.equals(other.description) &&
-		this.eventDay.equals(other.eventDay);
+		System.out.println(this.toString());
 	}
 }
 

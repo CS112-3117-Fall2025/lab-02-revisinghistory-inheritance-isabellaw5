@@ -8,7 +8,7 @@
 public class Main {
 	public static void main(String[] args) {
 		String tulsaDescription = "A black teenager, who was working as a shoe shiner in downtown Tulsa, Oklahoma, was arrested and accused of assaulting a white woman on a public elevator in broad daylight. A group of white vigilantes, intent on lynching him, and armed black men intent on protecting him gathered at the courthouse. A shot rang out, and the violence began. The riot resulted in 35 square blocks of destruction, including more than 1,250 homes, churches, schools, businesses, a hospital, and a library.";
-		String tulsaDay = new String(5, 31, 1921);
+		Date tulsaDay = new Date(5, 31, 1921);
 		HistoricalEvent tulsaRiot = new HistoricalEvent(tulsaDescription, tulsaDay);
 
 		System.out.println("====================================================");

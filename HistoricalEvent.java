@@ -10,47 +10,33 @@
 Historical Event
 -----------------------------------------
 
-- name: String
+- description: String
 
-- age: String
-
-- yearsOfExperience: String
-
-- playerNumber: int
+- eventDay: Date
 
 -----------------------------------------
 //default constructor method:
-+ ChessPlayer()
++ HistoricalEvent()
 
 //full constructor method
-+ ChessPlayer(name : String, age : String, yearsOfExperience : String, playerNumber : int)
++ HistoricalEvent(description : String, eventDay : Date)
 
 //Copy constructor method
-+ ChessPlayer(original : ChessPlayer)
++ HistoricalEvent(original : HistoricalEvent)
 
-+ setName(name : String) : void
++ setDescription(description : String) : void
 
-+ setAge(age : String) : void
++ setCitation(citation : String) : void
 
-+ setYearsOfExperience(yearsOfExperience : String) : void
++ setAll(description : String, eventDay : Date) : boolean
 
-+ setPlayerNumber(playerNumber : int) : boolean
++ getDescription() : String
 
-+ setAll(name : String, age :  String, yearsOfExperience :  String, playerNumber : int) : boolean
-
-+ getName() : String
-
-+ getAge() : String
-
-+ getYearsOfExperrience() :  String
-
-+ getPlayerNumber() : int
++ getEventDay() : Date
 
 + toString() : String
 
-+ equals(other : ChessPlayer) : boolean
-
-+ printData() : void
++ equals(obj : Object) : boolean
 -----------------------------------------
 */
 
@@ -61,8 +47,8 @@ public class HistoricalEvent
 	public static final String DEFAULT_DESCRIPTION = "Default Historical Description";
 
     /***** INSTANCE VARIABLES *****/
-	private String description;
-	private Date eventDay;
+	protected String description;
+	protected Date eventDay;
 
     /***** CONSTRUCTORS *****/
 	/**
@@ -193,10 +179,16 @@ public class HistoricalEvent
 	 *
 	 * @return boolean representing equality of two objects, true if all data is exactly the same (case-sensitive)
 	*/
-	public boolean equals(HistoricalEvent other)
-	{
-		return this.description.equals(other.description) &&
-		this.eventDay.equals(other.eventDay);
+	
+	@Override
+	public boolean equals(Object obj) {
+		if (obj == null) {
+			return false;
+		} else {
+			HistoricalEvent otherHistoricalEvent = (HistoricalEvent) obj; //downcasting Object type to Reised Historical Event type
+			return this.description.equals(otherHistoricalEvent.description) &&
+					this.eventDay.equals(otherHistoricalEvent.eventDay);
+		}
 	}
 }
 
